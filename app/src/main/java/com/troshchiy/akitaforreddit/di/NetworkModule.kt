@@ -1,6 +1,7 @@
 package com.troshchiy.akitaforreddit.di
 
 import android.content.Context
+import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.troshchiy.akitaforreddit.BuildConfig
@@ -13,6 +14,7 @@ import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 private const val TIMEOUT = 30L
 
@@ -26,6 +28,7 @@ private const val TIMEOUT = 30L
         Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
             .client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
 
     @Provides fun okHttpClient(cache: Cache): OkHttpClient =
@@ -44,6 +47,6 @@ private const val TIMEOUT = 30L
 
     @Provides fun cacheFile(context: Context): File = File(context.cacheDir, "okhttp_cache")
 
-    @Provides fun gson(): Gson = GsonBuilder().create()
+    @Provides fun gson(): Gson = GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create()
 
 }

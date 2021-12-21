@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.troshchiy.akitaforreddit">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".App"
         android:allowBackup="false"
@@ -12,7 +14,7 @@
         android:theme="@style/Theme.AkitaForReddit">
 
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.topnews.TopNewsActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.AkitaForReddit.NoActionBar">

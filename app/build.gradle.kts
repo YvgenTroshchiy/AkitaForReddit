@@ -71,6 +71,7 @@ dependencies {
 
     // region Network
     implementation(Dependencies.Network.retrofit2)
+    implementation(Dependencies.Network.retrofit2ConverterGson)
     implementation(Dependencies.Network.okhttp3LoggingInterceptor)
     implementation(Dependencies.Network.gson)
     // endregion
