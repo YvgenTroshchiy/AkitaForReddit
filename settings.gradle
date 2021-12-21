@@ -7,3 +7,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "AkitaForReddit"
 include ':app'
+include ':core'
