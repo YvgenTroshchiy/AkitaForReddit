@@ -1,4 +1,4 @@
-package com.troshchiy.akitaforreddit
+package com.troshchiy.akitaforreddit.ui.topnews
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
