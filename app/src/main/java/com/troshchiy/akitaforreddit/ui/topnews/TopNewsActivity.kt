@@ -10,7 +10,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.troshchiy.akitaforreddit.ui.theme.AkitaForRedditTheme
 
-class MainActivity : ComponentActivity() {
+class TopNewsActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {

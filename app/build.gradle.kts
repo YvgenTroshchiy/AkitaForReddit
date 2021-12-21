@@ -2,8 +2,9 @@ plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("kapt")
+    id("kotlin-parcelize")
     id("project-report") // ./gradlew dependencyReport
-    id("com.github.ben-manes.versions") version "0.28.0" // ./gradlew dependencyUpdates
+    id("com.github.ben-manes.versions") version "0.39.0" // ./gradlew dependencyUpdates
 }
 
 android {

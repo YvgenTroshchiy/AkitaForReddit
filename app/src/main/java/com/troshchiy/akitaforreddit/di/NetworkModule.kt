@@ -4,7 +4,7 @@ import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.troshchiy.akitaforreddit.BuildConfig
-import com.troshchiy.akitaforreddit.di.network.RedditService
+import com.troshchiy.akitaforreddit.network.RedditService
 import dagger.Module
 import dagger.Provides
 import java.io.File
