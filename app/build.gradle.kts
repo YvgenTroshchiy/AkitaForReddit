@@ -47,17 +47,17 @@ android {
 }
 
 dependencies {
-
     implementation("androidx.core:core-ktx:1.7.0")
-
     implementation("androidx.appcompat:appcompat:1.4.0")
     implementation("com.google.android.material:material:1.4.0")
-
     implementation("androidx.compose.ui:ui:${Dependencies.composeVersion}")
     implementation("androidx.compose.material:material:${Dependencies.composeVersion}")
     implementation("androidx.compose.ui:ui-tooling-preview:${Dependencies.composeVersion}")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0")
     implementation("androidx.activity:activity-compose:1.4.0")
+
+    implementation("com.google.dagger:dagger:${Dependencies.daggerVersion}")
+    kapt("com.google.dagger:dagger-compiler:${Dependencies.daggerVersion}")
 
     // region Test
     testImplementation("junit:junit:4.13.2")
