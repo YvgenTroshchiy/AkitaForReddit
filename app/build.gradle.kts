@@ -2,6 +2,8 @@ plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("kapt")
+    id("project-report") // ./gradlew dependencyReport
+    id("com.github.ben-manes.versions") version "0.28.0" // ./gradlew dependencyUpdates
 }
 
 android {
@@ -21,17 +23,23 @@ android {
     }
 
     buildTypes {
+        val baseUrl = "BASE_URL"
+
+        debug {
+            buildConfigField("String", baseUrl, "\"https://api.reddit.com\"")
+        }
         release {
             isMinifyEnabled = false
+            buildConfigField("String", baseUrl, "\"https://api.reddit.com\"")
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
     buildFeatures {
         compose = true
@@ -56,8 +64,15 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0")
     implementation("androidx.activity:activity-compose:1.4.0")
 
-    implementation("com.google.dagger:dagger:${Dependencies.daggerVersion}")
-    kapt("com.google.dagger:dagger-compiler:${Dependencies.daggerVersion}")
+    // Di
+    implementation(Dependencies.Di.dagger)
+    kapt(Dependencies.Di.daggerCompiler)
+
+    // region Network
+    implementation(Dependencies.Network.retrofit2)
+    implementation(Dependencies.Network.okhttp3LoggingInterceptor)
+    implementation(Dependencies.Network.gson)
+    // endregion
 
     // region Test
     testImplementation("junit:junit:4.13.2")
