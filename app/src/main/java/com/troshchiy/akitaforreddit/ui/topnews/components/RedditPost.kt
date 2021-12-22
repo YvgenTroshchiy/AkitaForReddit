@@ -1,8 +1,8 @@
 package com.troshchiy.akitaforreddit.ui.topnews.components
 
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -19,7 +19,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -38,7 +37,11 @@ fun RedditPost(
     Card(
         shape = MaterialTheme.shapes.medium,
         elevation = padding,
-        modifier = Modifier.padding(start = padding, end = padding, bottom = 8.dp)
+        modifier = Modifier
+            .padding(start = padding, end = padding, bottom = 8.dp)
+            .clickable(
+                onClick = onClick
+            )
     ) {
         Box(modifier = Modifier.padding(all = padding)) {
             Column() {
@@ -47,7 +50,7 @@ fun RedditPost(
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
-                        text = "Quit my job last night, it was nice to be home to make the kids breakfast and take them to school today! Off to hunt for a new opportunity, wish me luck :)",
+                        text = post.title,
                         maxLines = 1,
                     )
                 }
@@ -56,18 +59,16 @@ fun RedditPost(
                     modifier = Modifier
                         .requiredHeight(140.dp)
                         .fillMaxWidth(),
-                    painter = rememberImagePainter(
-                        data = "https://developer.android.com/images/brand/Android_Robot.png"
-                    ),
+                    painter = rememberImagePainter(data = post.thumbnail),
                     alignment = Alignment.Center,
                     contentScale = ContentScale.Crop,
                     contentDescription = "Image",
                 )
                 Spacer(Modifier.size(padding))
                 Box(modifier = Modifier.fillMaxWidth()) {
-                    Text(text = "hestolemysmile")
+                    Text(text = post.author)
                     Text(
-                        text = "11920",
+                        text = post.numComments,
                         textAlign = TextAlign.End,
                         modifier = Modifier.align(Alignment.CenterEnd)
                     )
