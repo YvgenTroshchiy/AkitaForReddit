@@ -1,4 +1,6 @@
 package com.troshchiy.akitaforreddit.ui.topnews
 
-class TopNewsViewModel {
+import androidx.lifecycle.ViewModel
+
+class TopNewsViewModel : ViewModel() {
 }

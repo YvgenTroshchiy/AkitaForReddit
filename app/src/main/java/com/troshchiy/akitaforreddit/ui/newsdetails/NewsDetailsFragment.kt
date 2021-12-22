@@ -1,4 +1,4 @@
-package com.troshchiy.akitaforreddit.ui.topnews
+package com.troshchiy.akitaforreddit.ui.newsdetails
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,13 +8,12 @@ import androidx.compose.material.Text
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 
-class TopNewsFragment : Fragment() {
-
+class NewsDetailsFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return ComposeView(requireContext()).apply {
             setContent {
-                Text(text = "TopNewsFragment")
+                Text(text = "NewsDetailsFragment")
             }
         }
     }

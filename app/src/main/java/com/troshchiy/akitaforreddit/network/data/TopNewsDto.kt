@@ -1,4 +1,4 @@
-package com.troshchiy.akitaforreddit.ui.topnews.data
+package com.troshchiy.akitaforreddit.network.data
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
