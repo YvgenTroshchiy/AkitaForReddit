@@ -14,7 +14,7 @@
         android:theme="@style/Theme.AkitaForReddit">
 
         <activity
-            android:name=".ui.topnews.TopNewsActivity"
+            android:name=".ui.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.AkitaForReddit.NoActionBar">

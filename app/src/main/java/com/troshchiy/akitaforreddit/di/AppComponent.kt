@@ -1,7 +1,7 @@
 package com.troshchiy.akitaforreddit.di
 
 import android.content.Context
-import com.troshchiy.akitaforreddit.ui.topnews.TopNewsActivity
+import com.troshchiy.akitaforreddit.ui.topnews.TopNewsFragment
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -15,6 +15,6 @@ interface AppComponent {
         fun create(@BindsInstance context: Context): AppComponent
     }
 
-    fun inject(topNewsActivity: TopNewsActivity)
+    fun inject(topNewsFragment: TopNewsFragment)
 
 }

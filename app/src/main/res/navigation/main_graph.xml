@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/topNewsFragment"
         android:name="com.troshchiy.akitaforreddit.ui.topnews.TopNewsFragment"
-        android:label="TopNewsFragment" >
+        android:label="TopNewsFragment">
         <action
             android:id="@+id/action_topNewsFragment_to_newsDetailsFragment"
             app:destination="@id/newsDetailsFragment" />
@@ -16,6 +16,10 @@
     <fragment
         android:id="@+id/newsDetailsFragment"
         android:name="com.troshchiy.akitaforreddit.ui.newsdetails.NewsDetailsFragment"
-        android:label="NewsDetailsFragment" />
+        android:label="NewsDetailsFragment">
+        <argument
+            android:name="post"
+            app:argType="com.troshchiy.akitaforreddit.network.data.RedditPost" />
+    </fragment>
 
 </navigation>
