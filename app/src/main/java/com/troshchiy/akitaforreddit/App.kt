@@ -16,6 +16,7 @@ class App : Application() {
         private set
 
     override fun onCreate() {
+        if (BuildConfig.DEBUG) setStrictMode()
         super.onCreate()
         appComponent = DaggerAppComponent.factory().create(this)
     }

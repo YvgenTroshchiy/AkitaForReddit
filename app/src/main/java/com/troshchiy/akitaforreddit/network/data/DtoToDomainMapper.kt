@@ -1,6 +1,6 @@
 package com.troshchiy.akitaforreddit.network.data
 
-fun TopNewsDto.toTopNews() = listingData.children.map { childrenToRedditPost(it) }
+fun TopNewsDto.mapToDomainModel() = listingData.children.map { childrenToRedditPost(it) }
 
 private fun childrenToRedditPost(children: TopNewsDto.ListingData.Children): RedditPost {
     val redditPost = children.redditPost

@@ -80,6 +80,7 @@ dependencies {
     implementation(Network.retrofit2ConverterGson)
     implementation(Network.okhttp3LoggingInterceptor)
     implementation(Network.gson)
+    implementation(Network.coil)
 
     // region Test
     testImplementation("junit:junit:4.13.2")

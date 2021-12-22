@@ -5,8 +5,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,6 +20,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,16 +29,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
-import com.troshchiy.akitaforreddit.appComponent
+import androidx.navigation.findNavController
+import com.troshchiy.akitaforreddit.R
 import com.troshchiy.akitaforreddit.extensions.toast
 import com.troshchiy.akitaforreddit.network.RedditService
-import com.troshchiy.akitaforreddit.network.data.toTopNews
+import com.troshchiy.akitaforreddit.network.data.mapToDomainModel
 import com.troshchiy.akitaforreddit.ui.theme.AkitaForRedditTheme
 import javax.inject.Inject
-import kotlinx.coroutines.launch
 
 class TopNewsFragment : Fragment() {
 
@@ -58,14 +59,28 @@ class TopNewsFragment : Fragment() {
 //            }
 //        }
 
+        val red = Color(0xffff0000)
+        val blue = Color(red = 0f, green = 0f, blue = 1f)
+
         return ComposeView(requireContext()).apply {
-            setContent {
-//                Surface(
-//                    modifier = Modifier
-//                        .background(Color(0xFFEDEAE0))
-//                ) {
-                    Text(text = "TopNewsFragment")
-//                }
+            setContent() {
+                Surface(color = blue) {
+                    Column() {
+                        Text(text = "TopNewsFragment")
+                        TextButton(
+                            onClick = {
+                                findNavController().navigate(R.id.action_topNewsFragment_to_newsDetailsFragment)
+                                Toast.makeText(context, "Showing toast....", Toast.LENGTH_SHORT).show()
+                            }
+                        ) {
+                            Text(
+                                text = "Open Detail",
+//                                style = MaterialTheme.typography.body2,
+//                                color = Color.White
+                            )
+                        }
+                    }
+                }
             }
         }
     }
@@ -74,7 +89,7 @@ class TopNewsFragment : Fragment() {
         val result = service.topNews(10, null)
 
         if (result.isSuccessful && result.body() != null) {
-            val right = result.body()!!.toTopNews()
+            val right = result.body()!!.mapToDomainModel()
             Log.d("TopNewsActivity", "result: $right")
         } else {
             Log.w("TopNewsActivity", "Error by loading: ${result.message()}")
