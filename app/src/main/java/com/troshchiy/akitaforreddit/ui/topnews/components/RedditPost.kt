@@ -78,10 +78,24 @@ fun RedditPost(
     }
 }
 
+@ExperimentalCoilApi
 @Preview(group = "Card")
 @Composable
 fun PreviewRedditPost() {
+    val post = RedditPost(
+        id = "rvb1r8",
+        thumbnail = "https://b.thumbs.redditmedia.com/TQmTFrAO_u1dnfrbHd6fm_6cynA-SiSYslmfl6vWzcY.jpg",
+        imageUrl = "https://i.redd.it/x8h3nisq7j981.jpg",
+        title = "Ahhh bliss",
+        author = "ListerineAfterOral",
+        created_utc = "1641241397.0",
+        numComments = "651",
+        isVideo = false,
+        videoUrl = null,
+        fallbackVideoUrl = null
+    )
+
     Box(modifier = Modifier.background(Color.Gray)) {
-//        RedditPost()
+        RedditPost(post) { }
     }
 }
