@@ -1,3 +1,5 @@
+import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
+
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -58,14 +60,15 @@ android {
 dependencies {
     implementation(project(Modules.core))
 
-    implementation("androidx.core:core-ktx:1.7.0")
-    implementation("androidx.appcompat:appcompat:1.4.0")
-    implementation("com.google.android.material:material:1.4.0")
-    implementation("androidx.compose.ui:ui:${Compose.version}")
-    implementation("androidx.compose.material:material:${Compose.version}")
-    implementation("androidx.compose.ui:ui-tooling-preview:${Compose.version}")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0")
-    implementation("androidx.activity:activity-compose:1.4.0")
+    implementation(Android.material)
+    implementation(Android.appcompat)
+
+    implementation(Compose.core)
+    implementation(Compose.ui)
+    implementation(Compose.material)
+    implementation(Compose.tooling)
+    implementation(Compose.lifecycle)
+    implementation(Compose.activity)
 
     // navigation
     implementation(AndroidX.navigationFragment)
@@ -83,9 +86,22 @@ dependencies {
     implementation(Network.coil)
 
     // region Test
-    testImplementation("junit:junit:4.13.2")
+    testImplementation(Test.junit)
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:${Compose.version}")
-    debugImplementation("androidx.compose.ui:ui-tooling:${Compose.version}")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:${Compose.version}") // TODO: move to Dependencies
+    debugImplementation("androidx.compose.ui:ui-tooling:${Compose.version}") // TODO: move to Dependencies
+}
+
+tasks.withType<DependencyUpdatesTask> {
+    rejectVersionIf {
+        isNonStable(candidate.version)
+    }
+}
+
+fun isNonStable(version: String): Boolean {
+    val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { version.toUpperCase().contains(it) }
+    val regex = "^[0-9,.v-]+(-r)?$".toRegex()
+    val isStable = stableKeyword || regex.matches(version)
+    return isStable.not()
 }

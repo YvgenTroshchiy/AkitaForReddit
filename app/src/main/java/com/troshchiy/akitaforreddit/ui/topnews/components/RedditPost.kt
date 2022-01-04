@@ -9,8 +9,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -32,47 +32,46 @@ fun RedditPost(
     post: RedditPost,
     onClick: () -> Unit
 ) {
-    val padding = 4.dp
+    val halfPadding = 4.dp
+    val padding = 8.dp
 
     Card(
         shape = MaterialTheme.shapes.medium,
-        elevation = padding,
+        elevation = halfPadding,
         modifier = Modifier
-            .padding(start = padding, end = padding, bottom = 8.dp)
+            .padding(start = halfPadding, end = halfPadding, bottom = padding)
             .clickable(
                 onClick = onClick
             )
     ) {
-        Box(modifier = Modifier.padding(all = padding)) {
-            Column() {
-                Box(
-                    modifier = Modifier.height(34.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        text = post.title,
-                        maxLines = 1,
-                    )
-                }
-                Spacer(Modifier.size(padding))
-                Image(
-                    modifier = Modifier
-                        .requiredHeight(140.dp)
-                        .fillMaxWidth(),
-                    painter = rememberImagePainter(data = post.thumbnail),
-                    alignment = Alignment.Center,
-                    contentScale = ContentScale.Crop,
-                    contentDescription = "Image",
+        Column(modifier = Modifier.padding(all = padding)) {
+            Box(
+                modifier = Modifier.height(34.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = post.title,
+                    maxLines = 2,
                 )
-                Spacer(Modifier.size(padding))
-                Box(modifier = Modifier.fillMaxWidth()) {
-                    Text(text = post.author)
-                    Text(
-                        text = post.numComments,
-                        textAlign = TextAlign.End,
-                        modifier = Modifier.align(Alignment.CenterEnd)
-                    )
-                }
+            }
+            Spacer(Modifier.size(halfPadding))
+            Image(
+                modifier = Modifier
+                    .wrapContentHeight()
+                    .fillMaxWidth(),
+                painter = rememberImagePainter(data = post.thumbnail),
+                alignment = Alignment.Center,
+                contentScale = ContentScale.Crop,
+                contentDescription = "Image",
+            )
+            Spacer(Modifier.size(halfPadding))
+            Box(modifier = Modifier.fillMaxWidth()) {
+                Text(text = post.author)
+                Text(
+                    text = post.numComments,
+                    textAlign = TextAlign.End,
+                    modifier = Modifier.align(Alignment.CenterEnd)
+                )
             }
         }
     }
