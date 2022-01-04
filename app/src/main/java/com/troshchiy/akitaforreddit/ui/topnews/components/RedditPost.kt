@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -25,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.troshchiy.akitaforreddit.network.data.RedditPost
+import com.troshchiy.akitaforreddit.ui.theme.AkitaForRedditTheme
 
 @ExperimentalCoilApi
 @Composable
@@ -94,7 +96,11 @@ fun PreviewRedditPost() {
         fallbackVideoUrl = null
     )
 
-    Box(modifier = Modifier.background(Color.Gray)) {
-        RedditPost(post) { }
+    AkitaForRedditTheme() {
+        Surface() {
+            Box(modifier = Modifier.background(Color.Gray)) {
+                RedditPost(post) { }
+            }
+        }
     }
 }
