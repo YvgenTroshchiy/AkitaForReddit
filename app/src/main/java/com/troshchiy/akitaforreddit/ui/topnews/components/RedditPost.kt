@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -26,11 +25,12 @@ import androidx.compose.ui.unit.dp
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.troshchiy.akitaforreddit.network.data.RedditPost
+import com.troshchiy.akitaforreddit.stubdata.post1
 import com.troshchiy.akitaforreddit.ui.theme.AkitaForRedditTheme
 
 @ExperimentalCoilApi
 @Composable
-fun RedditPost(
+fun PostCard(
     post: RedditPost,
     onClick: () -> Unit
 ) {
@@ -59,8 +59,8 @@ fun RedditPost(
             Spacer(Modifier.size(halfPadding))
             Image(
                 modifier = Modifier
-                    .wrapContentHeight()
-                    .fillMaxWidth(),
+                    .fillMaxWidth()
+                    .height(140.dp),
                 painter = rememberImagePainter(data = post.thumbnail),
                 alignment = Alignment.Center,
                 contentScale = ContentScale.Crop,
@@ -82,24 +82,11 @@ fun RedditPost(
 @ExperimentalCoilApi
 @Preview(group = "Card")
 @Composable
-fun PreviewRedditPost() {
-    val post = RedditPost(
-        id = "rvb1r8",
-        thumbnail = "https://b.thumbs.redditmedia.com/TQmTFrAO_u1dnfrbHd6fm_6cynA-SiSYslmfl6vWzcY.jpg",
-        imageUrl = "https://i.redd.it/x8h3nisq7j981.jpg",
-        title = "Ahhh bliss",
-        author = "ListerineAfterOral",
-        created_utc = "1641241397.0",
-        numComments = "651",
-        isVideo = false,
-        videoUrl = null,
-        fallbackVideoUrl = null
-    )
-
+fun PreviewPostCard() {
     AkitaForRedditTheme() {
         Surface() {
             Box(modifier = Modifier.background(Color.Gray)) {
-                RedditPost(post) { }
+                PostCard(post1) { }
             }
         }
     }
