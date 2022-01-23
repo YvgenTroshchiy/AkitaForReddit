@@ -1,5 +1,6 @@
 package com.troshchiy.akitaforreddit.ui.topnews
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -19,89 +20,62 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import coil.annotation.ExperimentalCoilApi
 import com.troshchiy.akitaforreddit.R
+import com.troshchiy.akitaforreddit.appComponent
 import com.troshchiy.akitaforreddit.extensions.toast
 import com.troshchiy.akitaforreddit.network.RedditService
 import com.troshchiy.akitaforreddit.network.data.RedditPost
 import com.troshchiy.akitaforreddit.network.data.mapToDomainModel
-import com.troshchiy.akitaforreddit.stubdata.post1
 import com.troshchiy.akitaforreddit.ui.theme.AkitaForRedditTheme
 import com.troshchiy.akitaforreddit.ui.topnews.components.PostCard
 import javax.inject.Inject
+import kotlinx.coroutines.launch
 
 @ExperimentalCoilApi
 class TopNewsFragment : Fragment() {
 
     @Inject lateinit var service: RedditService
 
+    val posts: MutableState<List<RedditPost>> = mutableStateOf(ArrayList())
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        context.appComponent.inject(this)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-
-//        requireContext().appComponent.inject(this)
-//
-//        lifecycleScope.launch {
-//            loadTopNews()
-//        }
-
-//        setContent {
-//            AkitaForRedditTheme {
-//                // A surface container using the 'background' color from the theme
-//                Surface(color = MaterialTheme.colors.background) {
-//                    TopNewsList()
-//                }
-//            }
-//        }
-
-        val red = Color(0xffff0000)
-        val blue = Color(red = 0f, green = 0f, blue = 1f)
+        lifecycleScope.launch {
+            loadTopNews()
+        }
 
         return ComposeView(requireContext()).apply {
             setContent() {
-                Surface(color = blue) {
-//                    TopNewsList()
-
-                    LazyColumn(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(top = 8.dp)
-                    ) {
-                        val topPosts = listOf<RedditPost>(post1, post1, post1)
-                        itemsIndexed(items = topPosts) { index: Int, post: RedditPost ->
-                            PostCard(post) {
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(top = 8.dp)
+                ) {
+                    itemsIndexed(items = posts.value) { index: Int, post: RedditPost ->
+                        PostCard(post) {
 //                                openNewsDetailsFragment(view)
-                                findNavController().navigate(R.id.action_topNewsFragment_to_newsDetailsFragment)
-                                Toast.makeText(context, "Showing toast....", Toast.LENGTH_SHORT).show()
-                            }
+                            findNavController().navigate(R.id.action_topNewsFragment_to_newsDetailsFragment)
+                            Toast.makeText(context, "Showing toast....", Toast.LENGTH_SHORT).show()
                         }
                     }
-
-//                    Column() {
-//                        Text(text = "TopNewsFragment")
-//                        TextButton(
-//                            onClick = {
-//                                findNavController().navigate(R.id.action_topNewsFragment_to_newsDetailsFragment)
-//                                Toast.makeText(context, "Showing toast....", Toast.LENGTH_SHORT).show()
-//                            }
-//                        ) {
-//                            Text(
-//                                text = "Open Detail",
-////                                style = MaterialTheme.typography.body2,
-////                                color = Color.White
-//                            )
-//                        }
-//                    }
                 }
             }
         }
@@ -112,11 +86,13 @@ class TopNewsFragment : Fragment() {
         Toast.makeText(context, "Showing toast....", Toast.LENGTH_SHORT).show()
     }
 
+    // TODO: temp. should be in the VM
     private suspend fun loadTopNews() {
         val result = service.topNews(10, null)
 
         if (result.isSuccessful && result.body() != null) {
             val right = result.body()!!.mapToDomainModel()
+            posts.value = right
             Log.d("TopNewsActivity", "result: $right")
         } else {
             Log.w("TopNewsActivity", "Error by loading: ${result.message()}")
