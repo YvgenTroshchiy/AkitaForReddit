@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
 
 class NewsDetailsFragment : Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
         val red = Color(0xffff0000)
         val blue = Color(red = 0f, green = 0f, blue = 1f)

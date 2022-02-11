@@ -6,7 +6,7 @@ plugins {
     kotlin("kapt")
     id("kotlin-parcelize")
     id("project-report") // ./gradlew dependencyReport
-    id("com.github.ben-manes.versions") version "0.39.0" // ./gradlew dependencyUpdates
+    id("com.github.ben-manes.versions") version "0.42.0" // ./gradlew dependencyUpdates
 }
 
 android {
@@ -66,7 +66,8 @@ dependencies {
     implementation(Compose.core)
     implementation(Compose.ui)
     implementation(Compose.material)
-    implementation(Compose.tooling)
+    debugImplementation(Compose.tooling)
+    implementation(Compose.toolingPreview)
     implementation(Compose.lifecycle)
     implementation(Compose.activity)
 
