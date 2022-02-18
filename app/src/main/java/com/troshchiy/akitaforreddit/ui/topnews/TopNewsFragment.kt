@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -42,20 +41,15 @@ class TopNewsFragment : Fragment() {
                         .fillMaxSize()
                         .padding(top = 8.dp)
                 ) {
-                    itemsIndexed(items = posts) { index: Int, post: RedditPost ->
-                        PostCard(post) {
-//                                openNewsDetailsFragment(view)
-                            findNavController().navigate(R.id.action_topNewsFragment_to_newsDetailsFragment)
-                            Toast.makeText(context, "Showing toast....", Toast.LENGTH_SHORT).show()
-                        }
+                    itemsIndexed(items = posts) { _: Int, post: RedditPost ->
+                        PostCard(post) { openNewsDetailsFragment() }
                     }
                 }
             }
         }
     }
 
-    private fun openNewsDetailsFragment(view: View) {
-        view.findNavController().navigate(R.id.action_topNewsFragment_to_newsDetailsFragment)
-        Toast.makeText(context, "Showing toast....", Toast.LENGTH_SHORT).show()
+    private fun openNewsDetailsFragment() {
+        view?.findNavController()?.navigate(R.id.action_topNewsFragment_to_newsDetailsFragment)
     }
 }
