@@ -9,7 +9,7 @@
         android:name="com.troshchiy.akitaforreddit.ui.topnews.TopNewsFragment"
         android:label="TopNewsFragment">
         <action
-            android:id="@+id/action_topNewsFragment_to_newsDetailsFragment"
+            android:id="@+id/toNewsDetailsFragments"
             app:destination="@id/newsDetailsFragment" />
     </fragment>
 

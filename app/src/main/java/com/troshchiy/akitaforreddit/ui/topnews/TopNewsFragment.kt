@@ -15,7 +15,6 @@ import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import coil.annotation.ExperimentalCoilApi
-import com.troshchiy.akitaforreddit.R
 import com.troshchiy.akitaforreddit.appComponent
 import com.troshchiy.akitaforreddit.network.data.RedditPost
 import com.troshchiy.akitaforreddit.ui.topnews.components.PostCard
@@ -42,14 +41,14 @@ class TopNewsFragment : Fragment() {
                         .padding(top = 8.dp)
                 ) {
                     itemsIndexed(items = posts) { _: Int, post: RedditPost ->
-                        PostCard(post) { openNewsDetailsFragment() }
+                        PostCard(post) { openNewsDetailsFragment(post) }
                     }
                 }
             }
         }
     }
 
-    private fun openNewsDetailsFragment() {
-        findNavController().navigate(R.id.action_topNewsFragment_to_newsDetailsFragment)
+    private fun openNewsDetailsFragment(post: RedditPost) {
+        findNavController().navigate(TopNewsFragmentDirections.toNewsDetailsFragments(post))
     }
 }
