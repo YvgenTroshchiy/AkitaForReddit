@@ -13,10 +13,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import coil.annotation.ExperimentalCoilApi
 import com.troshchiy.akitaforreddit.R
 import com.troshchiy.akitaforreddit.appComponent
-import com.troshchiy.akitaforreddit.extensions.navigate
 import com.troshchiy.akitaforreddit.network.data.RedditPost
 import com.troshchiy.akitaforreddit.ui.topnews.components.PostCard
 import javax.inject.Inject
@@ -50,6 +50,6 @@ class TopNewsFragment : Fragment() {
     }
 
     private fun openNewsDetailsFragment() {
-        navigate(R.id.action_topNewsFragment_to_newsDetailsFragment)
+        findNavController().navigate(R.id.action_topNewsFragment_to_newsDetailsFragment)
     }
 }
