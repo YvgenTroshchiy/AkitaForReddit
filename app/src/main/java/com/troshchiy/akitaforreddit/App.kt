@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import com.troshchiy.akitaforreddit.di.AppComponent
 import com.troshchiy.akitaforreddit.di.DaggerAppComponent
+import com.troshchiy.akitaforreddit.utils.setStrictMode
 
 val Context.appComponent: AppComponent
     get() = when (this) {
@@ -12,6 +13,7 @@ val Context.appComponent: AppComponent
     }
 
 class App : Application() {
+
     lateinit var appComponent: AppComponent
         private set
 

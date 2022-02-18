@@ -1,4 +1,4 @@
-package com.troshchiy.akitaforreddit
+package com.troshchiy.akitaforreddit.utils
 
 import android.os.StrictMode
 import java.util.concurrent.TimeUnit
