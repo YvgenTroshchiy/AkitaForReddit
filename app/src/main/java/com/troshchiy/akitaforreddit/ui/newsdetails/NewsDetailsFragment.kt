@@ -4,23 +4,32 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.foundation.Image
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
+import coil.compose.rememberImagePainter
+import com.troshchiy.akitaforreddit.network.data.RedditPost
 
 class NewsDetailsFragment : Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    private val safeArgs: NewsDetailsFragmentArgs by navArgs()
+    private val post: RedditPost by lazy(LazyThreadSafetyMode.NONE) { safeArgs.post }
 
-        val red = Color(0xffff0000)
-        val blue = Color(red = 0f, green = 0f, blue = 1f)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
         return ComposeView(requireContext()).apply {
             setContent() {
-                Surface(color = red) {
-                    Text(text = "NewsDetailsFragment")
+                Surface() {
+                    Image(
+                        painter = rememberImagePainter(data = post.thumbnail),
+                        alignment = Alignment.Center,
+                        contentScale = ContentScale.Crop,
+                        contentDescription = "Image",
+                    )
                 }
             }
         }

@@ -5,7 +5,7 @@ plugins {
     kotlin("android")
     kotlin("kapt")
     id("kotlin-parcelize")
-    id("androidx.navigation.safeargs")  // remove .kotiln because of https://stackoverflow.com/a/67681697/3825816
+    id("androidx.navigation.safeargs")  // removed .kotiln because of https://stackoverflow.com/a/67681697/3825816
     id("project-report") // ./gradlew dependencyReport
     id("com.github.ben-manes.versions") version "0.42.0" // ./gradlew dependencyUpdates
 }
