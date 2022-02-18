@@ -42,9 +42,7 @@ fun PostCard(
         elevation = halfPadding,
         modifier = Modifier
             .padding(start = halfPadding, end = halfPadding, bottom = padding)
-            .clickable(
-                onClick = onClick
-            )
+            .clickable(onClick = onClick)
     ) {
         Column(modifier = Modifier.padding(all = padding)) {
             Box(
