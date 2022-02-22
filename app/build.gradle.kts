@@ -79,6 +79,7 @@ dependencies {
     // Di
     implementation(Di.dagger)
     kapt(Di.daggerCompiler)
+    kapt(Di.daggerBrowser)
 
     // region Network
     implementation(Network.retrofit2)

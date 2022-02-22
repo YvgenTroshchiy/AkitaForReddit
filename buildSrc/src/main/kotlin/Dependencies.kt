@@ -32,6 +32,8 @@ object Di {
     private const val version = "2.40.5"
     const val dagger = "com.google.dagger:dagger:$version"
     const val daggerCompiler = "com.google.dagger:dagger-compiler:$version"
+
+    const val daggerBrowser = "com.snap.daggerbrowser:daggerbrowser-processor:0.7"
 }
 
 object Network {
