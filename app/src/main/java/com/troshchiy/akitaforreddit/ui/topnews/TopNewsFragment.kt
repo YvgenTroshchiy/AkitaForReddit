@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.dp
@@ -35,10 +36,14 @@ class TopNewsFragment : Fragment() {
             setContent() {
                 val posts = viewModel.posts.value
 
+                // We save the scrolling position with this state
+                val scrollState = rememberLazyListState()
+
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(top = 8.dp)
+                        .padding(top = 8.dp),
+                    state = scrollState
                 ) {
                     itemsIndexed(items = posts) { _: Int, post: RedditPost ->
                         PostCard(post) { openNewsDetailsFragment(post) }
