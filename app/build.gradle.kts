@@ -92,8 +92,8 @@ dependencies {
     testImplementation(Test.junit)
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:${Compose.version}") // TODO: move to Dependencies
-    debugImplementation("androidx.compose.ui:ui-tooling:${Compose.version}") // TODO: move to Dependencies
+    androidTestImplementation(Compose.uiTest)
+    debugImplementation(Compose.uiTooling)
 }
 
 tasks.withType<DependencyUpdatesTask> {
