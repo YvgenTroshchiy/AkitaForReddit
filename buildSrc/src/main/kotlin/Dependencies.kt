@@ -18,6 +18,7 @@ object AndroidX {
 }
 
 object Compose {
+    @Suppress("could be private") // uses outside for kotlinCompilerExtensionVersion
     const val version = "1.1.1"
     const val core = "androidx.core:core-ktx:1.7.0"
     const val ui = "androidx.compose.ui:ui:$version"
